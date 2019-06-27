@@ -68,6 +68,24 @@ public class UsuariosWSTest {
 		Leilao esperado = new Leilao(1L, "Geladeira", 800.0, mauricio, false);
 		Assert.assertEquals(esperado, leilao);
 	}
+	
+	/**
+	 * /leiloes/total devolve o numero total de leiloes
+	 * usar o getInt e devolver em XML
+	 */
+	
+	@Test
+	public void devolveNumeroTotalLeiloes() {
+		XmlPath path = given()
+				.header("Accept", "application/xml")
+				.get("/leiloes/total")
+				.andReturn()
+				.xmlPath();
+		
+		int total = path.getInt("int");
+		
+		Assert.assertEquals(2, total);
+	}
 }
 
 //public class UsuariosWSTest {
